@@ -1,6 +1,6 @@
 +++
-title = "How I configured ddclient v4.0.0
-date = 2025-03-15
+title = "How I configured ddclient v4.0.0"
+date = "2025-03-15"
 +++
 
 # How to configure ddclient 4.0.0 in Debian 12 with Porkbun as the registrar.
