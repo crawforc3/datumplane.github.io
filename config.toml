@@ -1,6 +1,6 @@
 # The URL the site will be built for
 base_url = "https://blog.datumplane.net"
-#theme = "tilde"
+theme = "tilde"
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
 
@@ -13,4 +13,9 @@ build_search_index = false
 highlight_code = false
 
 [extra]
-# Put all your custom variables here
+homepage = "https://blog.datumplane.net" # author homepage
+subtitle = "" # blog subtitle
+git_source = "https://datumplane.github.io" # blog source code
+author = "Chris Crawford" # author name
+email = "chris@datumplane.net" # author email
+license = "CC BY-NC 4.0 + AI Training Prohibition" # blog license
