@@ -1,9 +1,9 @@
 +++
-title = "How I configured ddclient v4.0.0"
+title = "I configured ddclient v4.0.0"
 date = "2025-03-15"
 +++
 
-# How to configure ddclient 4.0.0 in Debian 12 with Porkbun as the registrar.
+# I configured ddclient 4.0.0 in Debian 12 with Porkbun as the registrar.
 
 
 This is how I installed and configured ddclient v4.0.0 on a Debian 12 Linux container running in Proxmox 8. I use porkbun for my domain resgitrar.
