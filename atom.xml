@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>datumplane</title>
+    <link rel="self" type="application/atom+xml" href="https://blog.datumplane.net/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://blog.datumplane.net"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2025-03-15T00:00:00+00:00</updated>
+    <id>https://blog.datumplane.net/atom.xml</id>
+    <entry xml:lang="en">
+        <title>I configured ddclient v4.0.0</title>
+        <published>2025-03-15T00:00:00+00:00</published>
+        <updated>2025-03-15T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.datumplane.net/posts/ddclient/"/>
+        <id>https://blog.datumplane.net/posts/ddclient/</id>
+        
+        <content type="html" xml:base="https://blog.datumplane.net/posts/ddclient/">&lt;h2 id=&quot;i-configured-ddclient-4-0-0-in-debian-12-with-porkbun-as-the-registrar&quot;&gt;I configured ddclient 4.0.0 in Debian 12 with Porkbun as the registrar.&lt;&#x2F;h2&gt;
+&lt;p&gt;This is how I installed and configured ddclient v4.0.0 on a Debian 12 Linux container running in Proxmox 8. I use porkbun for my domain resgitrar.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;setup-and-install&quot;&gt;Setup and install&lt;&#x2F;h3&gt;
+&lt;pre&gt;&lt;code&gt;wget https:&amp;#x2F;&amp;#x2F;github.com&amp;#x2F;ddclient&amp;#x2F;ddclient&amp;#x2F;releases&amp;#x2F;download&amp;#x2F;v4.0.0&amp;#x2F;ddclient-4.0.0.tar.gz
+tar xvfa ddclient-4.0.0.tar.gz 
+apt install dh-autoreconf 
+cd ddclient-4.0.0&amp;#x2F;
+.&amp;#x2F;configure --prefix=&amp;#x2F;usr --sysconfdir=&amp;#x2F;etc --localstatedir=&amp;#x2F;var
+make
+make VERBOSE=1 check
+sudo make install
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;configure-ddclient&quot;&gt;Configure ddclient&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;code&gt;nano &#x2F;etc&#x2F;ddclient&#x2F;ddclient.conf&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;pid=&amp;#x2F;var&amp;#x2F;run&amp;#x2F;ddclient.pid  # record PID in file.
+use=web, web=freedns.afraid.org&amp;#x2F;dynamic&amp;#x2F;check.php, web-skip=&amp;#x27;DETECTED IP&amp;#x27;
+protocol=porkbun
+apikey=***
+secretapikey=***
+root-domain=mydomain.net
+mydomain.net
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;configure-systemd-unit&quot;&gt;Configure systemd unit&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;code&gt;systemctl edit --full ddclient.service&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;pre&gt;&lt;code&gt;[Unit]
+Description=Dynamic DNS Update Client
+Wants=network-online.target
+After=network-online.target nss-lookup.target
+
+[Service]
+Type=exec
+Environment=daemon_interval=5m
+ExecStart=&amp;#x2F;usr&amp;#x2F;bin&amp;#x2F;ddclient --daemon ${daemon_interval} --foreground --verbose --syslog
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target  
+&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>My first post</title>
+        <published>2019-11-27T00:00:00+00:00</published>
+        <updated>2019-11-27T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.datumplane.net/posts/first/"/>
+        <id>https://blog.datumplane.net/posts/first/</id>
+        
+        <content type="html" xml:base="https://blog.datumplane.net/posts/first/">&lt;p&gt;This is my first blog post.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>
