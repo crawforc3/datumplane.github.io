@@ -2,8 +2,8 @@ title: datumplane
 email: chris@datumplane.net
 description: >-
   Personal blog and technical notes
-baseurl: "/blog"
-url: "https://datumplane.net"
+baseurl: ""
+url: "https://datumplane.github.io"
 twitter_username: 
 github_username: datumplane
 
